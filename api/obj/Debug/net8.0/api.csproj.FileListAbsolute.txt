@@ -142,3 +142,4 @@ C:\Users\user\OneDrive\Desktop\socialNash\api\bin\Debug\net8.0\runtimes\win\lib\
 C:\Users\user\OneDrive\Desktop\socialNash\api\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\user\OneDrive\Desktop\socialNash\api\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\user\OneDrive\Desktop\socialNash\api\obj\Debug\net8.0\api.csproj.Up2Date
+C:\Users\user\OneDrive\Desktop\socialNash\api\obj\Debug\net8.0\api.sourcelink.json
