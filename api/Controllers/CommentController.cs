@@ -68,10 +68,24 @@ namespace api.Controllers
 
             if(commentModel == null)
             {
-                return NotFound("Comment Not Found!");                
+                return NotFound("Comment does not exist!");                
             }
 
             return Ok(commentModel.ToCommentDTO());
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var comment = await _commentRepository.DeleteAsync(id);
+
+            if(comment == null)
+            {
+                return NotFound("Comment does not exist!");
+            }
+
+            return Ok(comment);
         }
     }
 }
