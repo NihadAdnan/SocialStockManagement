@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using api.Data;
 using api.DTOs.Stock;
@@ -55,7 +56,23 @@ namespace api.Repository
                 stocks = stocks.Where(s=> s.Symbol.Contains(query.Symbol));
             }
 
-            return await stocks.ToListAsync();
+            if(!string.IsNullOrWhiteSpace(query.SortBy))
+            {
+                var sortOptions = new Dictionary<string, Expression<Func<Stock, object>>>(StringComparer.OrdinalIgnoreCase)
+                {
+                    {"Symbol", s => s.Symbol},
+                    {"CompanyName", s => s.CompanyName} 
+                };
+
+                if(sortOptions.TryGetValue(query.SortBy, out var sortExpression))
+                {
+                    stocks = query.IsDecsending ? stocks.OrderByDescending(sortExpression) : stocks.OrderBy(sortExpression);
+                }
+            }
+
+            var skipNumber = (query.PageNumber - 1) * query.PageSize;
+
+            return await stocks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)
